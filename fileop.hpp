@@ -2,6 +2,9 @@
 #include <io.h>
 #include <iostream>
 
+#include <sys/stat.h> 　
+#include <sys/types.h>
+
 //!创建文件夹 1成功 
 int creatFolder(const char* folderPath)
 {
@@ -16,6 +19,14 @@ int creatFolder(const char* folderPath)
 			return 0;
 
 	}
+	
+	std::string path =folderPath;
+    int isCreate = mkdir(path.c_str(),S_IRUSR | S_IWUSR | S_IXUSR | S_IRWXG | S_IRWXO);
+    if( isCreate==0 )
+        printf("create path:%s\n",path.c_str());
+    else
+        printf("create path failed! error code : %s \n",isCreate,path.c_str());
+    
 
 	return 1;
 }
